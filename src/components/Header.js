@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addToDo } from '../redux/todo/todoSlice';
 
-export const Header = ({ addTodo }) => {
+export const Header = () => {
   const [inputText, setInputText] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.trim()) {
-      addTodo(inputText);
+      dispatch(addToDo({ title: inputText }));
       setInputText("");
     }
   };
-
+  
   return (
     <header className="header mb-4">
       <h1 className="text-4xl text-[#7AA2E3] font-bold text-center mb-4">todos</h1>
